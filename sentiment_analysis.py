@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.cbook as cbook
+
 # Takes away puntuation chars
 def strip_punctuation(word):
     punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@', '-']
@@ -61,3 +65,14 @@ with open('resulting_data.csv', 'w') as data:
     for tweet in data_collected:
         text = '{},{},{},{},{}\n'.format(tweet[0], tweet[1], tweet[2], tweet[3], tweet[4])
         data.write(text)
+
+y_data = [data[0] for data in data_collected]
+x_data = [data[4] for data in data_collected]
+
+plt.style.use('seaborn')
+fig, ax = plt.subplots()
+ax.scatter(x_data, y_data, alpha=0.7, color='r', edgecolors='none')
+ax.set_xlabel('Net Score')
+ax.set_ylabel('Number of Retweets')
+ax.set_title('Sentiment Analysis')
+plt.show()
